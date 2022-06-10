@@ -2,13 +2,13 @@ from os import walk
 import pandas as pd
 
 def process_owlcv_kaggle():
+    data_path = '/content/nlptrading/dataset/stock_market_data/'
     names = ['forbes2000','nasdaq', 'nyse','sp500']
     markets = {}
     for name in names:
-        path = 'data/stock_market_data/'+name+'/csv/'
-        markets[name] = next(walk(path), (None, None, []))[2]  # [] if no file
-
-    #Takes 30 seconds
+        path = data_path+name+'/csv/'
+        print(path)
+        markets[name] = next(walk(path), (None, None, []))[2]  # [] if no file    #Takes 30 seconds
     stocks_dataset = pd.DataFrame(columns = ['Symbol', 'Date', 'Low', 'Open', 'Volume', 'High', 'Close', 'Adjusted Close'])
 
     added_stocks = []
@@ -17,7 +17,7 @@ def process_owlcv_kaggle():
         for stock in markets[market]:
             if(stock not in added_stocks):
                 added_stocks.append(stock)
-                csv = pd.read_csv('stock_market_data/'+ market +'/csv/'+ stock )
+                csv = pd.read_csv(data_path+ market +'/csv/'+ stock )
                 csv['Symbol'] = stock[:-4]
                 df_list.append(csv)
     full_df = pd.concat(df_list, ignore_index = True)
@@ -45,5 +45,5 @@ def process_owlcv_kaggle():
     train_df = full_df.loc[full_df.Date.dt.year <  2016]
     test_df  = full_df.loc[full_df.Date.dt.year >= 2016]
 
-    train_df.to_csv('../../data/train_df.csv')
-    test_df.to_csv('../../data/test_df.csv')
+    train_df.to_csv(data_path + '../train_df.csv')
+    test_df.to_csv(data_path + '../test_df.csv')
