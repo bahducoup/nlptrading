@@ -1,6 +1,8 @@
 from copy import deepcopy
 import pandas as pd
 from pyfolio import timeseries
+from pypfopt.efficient_frontier import EfficientFrontier
+
 
 
 def get_daily_return(df, value_col_name="account_value"):
