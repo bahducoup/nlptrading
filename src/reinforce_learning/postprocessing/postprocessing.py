@@ -1,5 +1,6 @@
 from copy import deepcopy
 import pandas as pd
+import numpy as np
 from pyfolio import timeseries
 from pypfopt.efficient_frontier import EfficientFrontier
 

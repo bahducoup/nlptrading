@@ -51,4 +51,4 @@ def plot_portfolio_traces(traces:list, time_ind):
     fig.update_yaxes(showline=True,linecolor='black',showgrid=True, gridwidth=1, gridcolor='LightSteelBlue',mirror=True)
     fig.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='LightSteelBlue')
 
-    fig.show()
+    return fig
